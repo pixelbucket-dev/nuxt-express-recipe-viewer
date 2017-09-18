@@ -1,5 +1,21 @@
 # nuxt-express-recipe-viewer
 
+This project uses the inofficial vue-cli nuxt-express preset from https://github.com/nuxt-community/express-template
+
+## Implemented features
+* Display list of available recipes or warning message if no recipes are available
+* Display individual recipe details including image. If recipe does not exist (anymore) a warning message is written instead.
+* Filter through recipes by their name. The filter is applied on the backend. The filter stays active after returning to / from individual recipe routes.
+
+## Outstanding features
+* Starring recipes
+* Pagination
+
+## Todo
+* Write tests for the above, e.g. filtering, error handling, etc.
+* Improve eslint rules to be compatible with `prettier` vscode plugin and auto-formatting
+* Better styling and improved GUI
+
 > Nuxt.js project
 
 ## Build Setup
