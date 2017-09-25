@@ -2,7 +2,7 @@
   <div class="recipe-simple">
     <nuxt-link :to="{ name: 'id', params: { id: index }}">
       <h3>
-        {{recipe.name}}
+        {{recipe.index + 1}} &mdash; {{recipe.name}}
       </h3>
     </nuxt-link>
     <div class="item-container">
