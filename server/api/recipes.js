@@ -6,6 +6,9 @@ const recipesIndexes = recipes.map((item, index) => {
   return item
 })
 
+let filterTerm = ''
+let filteredRecipes = recipesIndexes
+
 const router = Router()
 
 const listItemSimple = (item, index) => ({
@@ -27,13 +30,13 @@ function getRecipesForPage (query, recipesFiltered) {
   const pageIndex = Number(query.pageindex) || 0
   start = pageIndex * itemsPerPage
   end = Math.min(start + itemsPerPage, recipesFiltered.length)
-  console.log(`filter: ${query.filter}`)
+  /* console.log(`filter: ${query.filter}`)
   console.log(`itemsPerPage: ${itemsPerPage}`)
   console.log(`pageIndex: ${pageIndex}`)
   console.log(`start: ${start}`)
   console.log(`end: ${end}`)
   console.log(`maxPages: ${maxPages}`)
-  console.log(`start + itemsPerPage: ${start + Number(itemsPerPage)}`)
+  console.log(`start + itemsPerPage: ${start + Number(itemsPerPage)}`) */
   return recipesFiltered.slice(start, end)
 }
 
@@ -41,15 +44,6 @@ const getContentRange = (recipesFiltered) => `recipes/${start}-${end - 1}/${reci
 /* GET recipes listing. */
 router.get('/recipes', (req, res, next) => {
   let recipesForPage
-  // const pageItems = getRecipesForPage(req.query, recipesIndexes)
-  // console.log(`pageItems: ${pageItems}`)
-  // res.set({
-  //   // 'Content-Type': 'application/json',
-  //   // 'Content-Length': `${recipesIndexes.length}`,
-  //   // 'Accept-Ranges': 'recipes',
-  //   'Content-Range': getContentRange()
-  //   // 'ETag': '12345'
-  // })
   if (!req.query.filter || req.query.filter === '') {
     recipesForPage = getRecipesForPage(req.query, recipesIndexes)
     res.set({
@@ -57,12 +51,14 @@ router.get('/recipes', (req, res, next) => {
     })
     res.json(recipesForPage.map(listItemSimple))
   } else {
-    const filterTerm = req.query.filter.toLowerCase()
-    const filteredRecipes = recipesIndexes
-      .filter(item => item.name.toLowerCase().indexOf(filterTerm) !== -1)
-      .map(listItemSimple)
-
-    console.log('filteredRecipes: ', filteredRecipes)
+    const newFilterTerm = req.query.filter.toLowerCase()
+    if (filterTerm !== newFilterTerm) {
+      filterTerm = newFilterTerm
+      filteredRecipes = recipesIndexes
+        .filter(item => item.name.toLowerCase().indexOf(filterTerm) !== -1)
+        .map(listItemSimple)
+    }
+    // console.log('filteredRecipes: ', filteredRecipes)
     recipesForPage = getRecipesForPage(req.query, filteredRecipes)
     res.set({
       'Content-Range': getContentRange(filteredRecipes)

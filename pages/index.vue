@@ -7,11 +7,11 @@
     <input v-on:keyup="filter" v-model="filterTerm" type="text" id="searchInp" placeholder="Filter by name" class="filter">
     <ul v-if="recipes && recipes.length > 0" class="recipes">
       <li v-for="(recipe, index) in recipes" :key="index" class="recipe">
-        <RecipeSimple v-bind:recipe="recipe" v-bind:index="index" />
+        <RecipeSimple :currentPage= "currentPage" :filterTerm= "filterTerm" :index="index" :recipe="recipe" />
       </li>
     </ul>
     <p v-else>Sorry, we currently have no recipes for you.</p>
-    <MyFooter :next="next" :max-pages="maxPages" />
+    <MyFooter :selectPage="selectPage" :max-pages="maxPages" />
   </section>
 </template>
 
@@ -21,10 +21,12 @@ import MyFooter from '~/components/Footer.vue'
 import RecipeSimple from '~/components/RecipeSimple.vue'
 import filter from './recipefilter'
 
-async function fetchRecipes (filterTerm) {
-  let { data, headers } = await axios.get(`/api/recipes/?filter=${filterTerm}&pageindex=0&itemsperpage=5`)
-  console.log(headers)
+async function fetchRecipes (filterTerm, currentPage) {
+  // debugger // eslint-disable-line
+  let { data, headers } = await axios.get(`/api/recipes/?filter=${filterTerm}&pageindex=${currentPage || 0}&itemsperpage=5`)
+  // console.log(headers)
   return {
+    currentPage,
     recipes: data,
     maxPages: parseInt(headers['content-range'].split('/')[3])
   }
@@ -40,8 +42,11 @@ export default {
       filterTerm: filter.filterTerm
     }
   },
-  async asyncData ({ params, error }) {
-    return fetchRecipes('')
+  async asyncData ({ params, query, error }) {
+    // console.log('query: ', query)
+    // debugger // eslint-disable-line
+    const fetchedRecipes = await fetchRecipes(params.filterTerm || '', params.currentPage || 0)
+    return fetchedRecipes
   },
   head () {
     return {
@@ -51,18 +56,15 @@ export default {
   methods: {
     async filter (e) {
       filter.filterTerm = this.filterTerm = e.target.value.toLowerCase()
-      // const response = fetchRecipes(filter.filterTerm)
-      let { data, headers } = await axios.get(`/api/recipes/?filter=${filter.filterTerm}&pageindex=0&itemsperpage=5`)
-      // debugger// eslint-disable-line
-      this.maxPages = parseInt(headers['content-range'].split('/')[3])
-      this.recipes = data
-      // console.log(response)
-      // debugger // eslint-disable-line
-      // this.maxPages = response.maxPages
-      // this.recipes = response.recipes
+      const response = await fetchRecipes(filter.filterTerm, 0)
+      this.maxPages = response.maxPages
+      this.recipes = response.recipes
     },
-    next () {
-
+    async selectPage (pageID) {
+      const response = await fetchRecipes(filter.filterTerm, pageID - 1)
+      this.currentPage = pageID - 1
+      this.maxPages = response.maxPages
+      this.recipes = response.recipes
     }
   }
 }

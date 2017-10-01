@@ -17,7 +17,7 @@
         </li>
       </ul>
     </div>
-    <nuxt-link class="button" to="/">
+    <nuxt-link class="button" :to="{ name: 'index', params: { filterTerm, currentPage } }">
       Recipes
     </nuxt-link>
   </section>
@@ -25,9 +25,11 @@
 
 <script>
 export default {
-  name: 'RecipeDetailed',
+  name: 'recipedetailed',
   props: {
+    currentPage: Number,
     index: Number,
+    filterTerm: String,
     recipe: Object
   }
 }

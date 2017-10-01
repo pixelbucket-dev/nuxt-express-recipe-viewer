@@ -1,5 +1,5 @@
 <template>
-  <RecipeDetailed v-bind:recipe="recipe" />
+  <RecipeDetailed :recipe="recipe" :currentPage="currentPage" :filterTerm="filterTerm" />
 </template>
 
 <script>
@@ -11,10 +11,16 @@ export default {
   components: {
     RecipeDetailed
   },
+  data () {
+    return {
+      currentPage: 0,
+      filterTerm: ''
+    }
+  },
   asyncData ({ params, error }) {
     return axios.get(`/api/recipes/${params.id}`)
       .then((res) => {
-        return { recipe: res.data }
+        return { currentPage: params.currentPage, filterTerm: params.filterTerm, recipe: res.data }
       })
       .catch((e) => {
         error({ statusCode: 404, message: 'Sorry, this recipe doesn\'t exist or may have been removed.' })

@@ -1,6 +1,6 @@
 <template>
   <div class="recipe-simple">
-    <nuxt-link :to="{ name: 'id', params: { id: index }}">
+    <nuxt-link :to="{ name: 'id', params: { currentPage, filterTerm, id: index }}">
       <h3>
         {{recipe.index + 1}} &mdash; {{recipe.name}}
       </h3>
@@ -22,6 +22,8 @@
 export default {
   name: 'recipesimple',
   props: {
+    currentPage: Number,
+    filterTerm: String,
     index: Number,
     recipe: Object
   }
