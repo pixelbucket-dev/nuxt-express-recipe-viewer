@@ -17,7 +17,8 @@
                     "quantity": "1 tsp"
                 }
             ],
-            "cookingTime": "30 minutes"
+            "cookingTime": "30 minutes",
+            "starred": false
         },
         {
             "name": "Beef Stroganoff",
@@ -36,7 +37,8 @@
                     "quantity": "300g"
                 }
             ],
-            "cookingTime": "30 minutes"
+            "cookingTime": "30 minutes",
+            "starred": false
         },
         {
             "name": "Chicken Caesar Salad",
@@ -59,7 +61,8 @@
                     "quantity": "150g"
                 }
             ],
-            "cookingTime": "25 minutes"
+            "cookingTime": "25 minutes",
+            "starred": false
         },
         {
             "name": "Lemon Chicken",
@@ -78,7 +81,8 @@
                     "quantity": "1 tsp"
                 }
             ],
-            "cookingTime": "30 minutes"
+            "cookingTime": "30 minutes",
+            "starred": false
         },
         {
             "name": "Beef Stroganoff",
@@ -97,7 +101,8 @@
                     "quantity": "300g"
                 }
             ],
-            "cookingTime": "30 minutes"
+            "cookingTime": "30 minutes",
+            "starred": false
         },
         {
             "name": "Chicken Caesar Salad",
@@ -120,7 +125,8 @@
                     "quantity": "150g"
                 }
             ],
-            "cookingTime": "25 minutes"
+            "cookingTime": "25 minutes",
+            "starred": false
         },
         {
             "name": "Lemon Chicken",
@@ -139,7 +145,8 @@
                     "quantity": "1 tsp"
                 }
             ],
-            "cookingTime": "30 minutes"
+            "cookingTime": "30 minutes",
+            "starred": false
         },
         {
             "name": "Beef Stroganoff",
@@ -158,7 +165,8 @@
                     "quantity": "300g"
                 }
             ],
-            "cookingTime": "30 minutes"
+            "cookingTime": "30 minutes",
+            "starred": false
         },
         {
             "name": "Chicken Caesar Salad",
@@ -181,7 +189,8 @@
                     "quantity": "150g"
                 }
             ],
-            "cookingTime": "25 minutes"
+            "cookingTime": "25 minutes",
+            "starred": false
         },        {
             "name": "Lemon Chicken",
             "imageUrl": "http://ichef.bbci.co.uk/food/ic/food_16x9_608/recipes/lemonchicken_11654_16x9.jpg",
@@ -199,7 +208,8 @@
                     "quantity": "1 tsp"
                 }
             ],
-            "cookingTime": "30 minutes"
+            "cookingTime": "30 minutes",
+            "starred": false
         },
         {
             "name": "Beef Stroganoff",
@@ -218,7 +228,8 @@
                     "quantity": "300g"
                 }
             ],
-            "cookingTime": "30 minutes"
+            "cookingTime": "30 minutes",
+            "starred": false
         },
         {
             "name": "Chicken Caesar Salad",
@@ -241,7 +252,8 @@
                     "quantity": "150g"
                 }
             ],
-            "cookingTime": "25 minutes"
+            "cookingTime": "25 minutes",
+            "starred": false
         },
         {
             "name": "Lemon Chicken",
@@ -260,7 +272,8 @@
                     "quantity": "1 tsp"
                 }
             ],
-            "cookingTime": "30 minutes"
+            "cookingTime": "30 minutes",
+            "starred": false
         },
         {
             "name": "Beef Stroganoff",
@@ -279,7 +292,8 @@
                     "quantity": "300g"
                 }
             ],
-            "cookingTime": "30 minutes"
+            "cookingTime": "30 minutes",
+            "starred": false
         },
         {
             "name": "Chicken Caesar Salad",
@@ -302,7 +316,8 @@
                     "quantity": "150g"
                 }
             ],
-            "cookingTime": "25 minutes"
+            "cookingTime": "25 minutes",
+            "starred": false
         },
         {
             "name": "Lemon Chicken",
@@ -321,7 +336,8 @@
                     "quantity": "1 tsp"
                 }
             ],
-            "cookingTime": "30 minutes"
+            "cookingTime": "30 minutes",
+            "starred": false
         },
         {
             "name": "Beef Stroganoff",
@@ -340,7 +356,8 @@
                     "quantity": "300g"
                 }
             ],
-            "cookingTime": "30 minutes"
+            "cookingTime": "30 minutes",
+            "starred": false
         },
         {
             "name": "Chicken Caesar Salad",
@@ -363,7 +380,8 @@
                     "quantity": "150g"
                 }
             ],
-            "cookingTime": "25 minutes"
+            "cookingTime": "25 minutes",
+            "starred": false
         }
     ]
 }
