@@ -1,8 +1,9 @@
 <template>
   <div class="recipe-simple">
-    <nuxt-link :to="{ name: 'id', params: { id: index }}">
+    Star: <input v-on:change="starRecipe" :key="recipe.index" type="checkbox" v-model="recipe.starred"/>
+    <nuxt-link :to="{ name: 'id', params: { currentPage, filterTerm, id: index }}">
       <h3>
-        {{recipe.name}}
+        {{recipe.index + 1}} &mdash; {{recipe.name}}
       </h3>
     </nuxt-link>
     <div class="item-container">
@@ -19,11 +20,24 @@
 </template>
 
 <script>
+import axios from '~/plugins/axios'
+
 export default {
   name: 'recipesimple',
   props: {
+    currentPage: Number,
+    filterTerm: String,
     index: Number,
-    recipe: Object
+    recipe: Object,
+    updateRecipe: Function
+  },
+  methods: {
+    async starRecipe (e) {
+      /* const { data } =  */await axios.post(`/api/star/${this.recipe.index}`, {
+        starred: this.recipe.starred
+      })
+      // this.updateRecipe(this.recipe.index, data)
+    }
   }
 }
 </script>
