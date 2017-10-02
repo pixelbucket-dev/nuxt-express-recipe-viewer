@@ -22,9 +22,7 @@ import RecipeSimple from '~/components/RecipeSimple.vue'
 import filter from './recipefilter'
 
 async function fetchRecipes (filterTerm, currentPage) {
-  // debugger // eslint-disable-line
   let { data, headers } = await axios.get(`/api/recipes/?filter=${filterTerm}&pageindex=${currentPage || 0}&itemsperpage=5`)
-  // console.log(headers)
   return {
     currentPage,
     recipes: data,
@@ -43,8 +41,6 @@ export default {
     }
   },
   async asyncData ({ params, query, error }) {
-    // console.log('query: ', query)
-    // debugger // eslint-disable-line
     const fetchedRecipes = await fetchRecipes(params.filterTerm || '', params.currentPage || 0)
     return fetchedRecipes
   },
@@ -65,7 +61,10 @@ export default {
       this.currentPage = pageID - 1
       this.maxPages = response.maxPages
       this.recipes = response.recipes
-    }
+    }/* ,
+    updateRecipe (index, data) {
+      this.recipes[index] = data
+    } */
   }
 }
 </script>

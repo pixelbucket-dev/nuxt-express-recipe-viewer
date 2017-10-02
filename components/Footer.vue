@@ -1,5 +1,4 @@
 <template>
-  <!-- <v-pagination v-on:input="selectPage" :length="maxPages" v-model="currentPage" /> -->
   <v-footer class="my-footer text-xs-center" :fixed="true" dark="false">
     <v-pagination :length="maxPages" v-model="currentPage" @input="changePage" />
   </v-footer>
@@ -16,7 +15,6 @@ export default {
   methods: {
     changePage (current) {
       this.selectPage(current)
-      // console.log(`Current: ${current}`)
     }
   }
 }
