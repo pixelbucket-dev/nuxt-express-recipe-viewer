@@ -30,13 +30,6 @@ function getRecipesForPage (query, recipesFiltered) {
   const pageIndex = Number(query.pageindex) || 0
   start = pageIndex * itemsPerPage
   end = Math.min(start + itemsPerPage, recipesFiltered.length)
-  /* console.log(`filter: ${query.filter}`)
-  console.log(`itemsPerPage: ${itemsPerPage}`)
-  console.log(`pageIndex: ${pageIndex}`)
-  console.log(`start: ${start}`)
-  console.log(`end: ${end}`)
-  console.log(`maxPages: ${maxPages}`)
-  console.log(`start + itemsPerPage: ${start + Number(itemsPerPage)}`) */
   return recipesFiltered.slice(start, end)
 }
 
@@ -58,13 +51,11 @@ router.get('/recipes', (req, res, next) => {
         .filter(item => item.name.toLowerCase().indexOf(filterTerm) !== -1)
         .map(listItemSimple)
     }
-    // console.log('filteredRecipes: ', filteredRecipes)
     recipesForPage = getRecipesForPage(req.query, filteredRecipes)
     res.set({
       'Content-Range': getContentRange(filteredRecipes)
     })
     res.json(recipesForPage)
-    // res.json(filteredRecipes)
   }
 })
 
