@@ -6,9 +6,6 @@ const recipesIndexes = recipes.map((item, index) => {
   return item
 })
 
-let filterTerm = ''
-let filteredRecipes = recipesIndexes
-
 const router = Router()
 
 const listItemSimple = (item, index) => ({
@@ -44,13 +41,10 @@ router.get('/recipes', (req, res, next) => {
     })
     res.json(recipesForPage.map(listItemSimple))
   } else {
-    const newFilterTerm = req.query.filter.toLowerCase()
-    if (filterTerm !== newFilterTerm) {
-      filterTerm = newFilterTerm
-      filteredRecipes = recipesIndexes
-        .filter(item => item.name.toLowerCase().indexOf(filterTerm) !== -1)
-        .map(listItemSimple)
-    }
+    const filterTerm = req.query.filter.toLowerCase()
+    const filteredRecipes = recipesIndexes
+      .filter(item => item.name.toLowerCase().indexOf(filterTerm) !== -1)
+      .map(listItemSimple)
     recipesForPage = getRecipesForPage(req.query, filteredRecipes)
     res.set({
       'Content-Range': getContentRange(filteredRecipes)
@@ -66,6 +60,21 @@ router.get('/recipes/:id', (req, res, next) => {
     res.json(recipesIndexes[id])
   } else {
     res.sendStatus(404)
+  }
+})
+
+/* Star a particular recipe */
+router.post('/star/:id', (req, res, next) => {
+  const id = parseInt(req.params.id)
+  if (recipes[id]) {
+    let body = []
+    req.on('data', (chunk) => {
+      body.push(chunk)
+    }).on('end', () => {
+      body = JSON.parse(Buffer.concat(body).toString())
+      recipes[id].starred = body.starred
+      res.json(recipesIndexes[id])
+    })
   }
 })
 
